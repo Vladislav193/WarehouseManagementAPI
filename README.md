@@ -21,16 +21,7 @@
    git clone <URL вашего репозитория>
    cd WarehouseManagementAPI
 
-2. **Создайте файл** `requirements.txt` с основными зависимостями (если не сделано):
-
-````
-   fastapi
-   uvicorn
-   asyncpg
-   sqlalchemy
-   databases
-````
-3. **Установите Docker и Docker Compose:**
+2. **Установите Docker и Docker Compose:**
 
    Убедитесь, что Docker и Docker Compose установлены на вашем компьютере.
 
