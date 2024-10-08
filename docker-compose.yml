@@ -1,0 +1,39 @@
+version: '20.10.22'
+
+services:
+  web:
+    build: .
+    container_name: fastapi_app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    environment:
+      - DATABASE_URL=postgresql+asyncpg://postgres:password@db:5432/warehouse_db
+    volumes:
+      - .:/app
+    networks:
+      - fastapi_network
+    command: >
+      sh -c 'uvicorn app.main:app --reload'
+
+  db:
+    image: postgres:13.0-alpine
+
+    container_name: postgres_db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: warehouse_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - fastapi_network
+
+volumes:
+  postgres_data:
+
+networks:
+  fastapi_network:
